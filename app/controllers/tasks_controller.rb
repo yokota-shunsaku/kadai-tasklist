@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   def index
     #if logged_in?
-      @task = current_user.tasks.build  # form_with 用
+      #@task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
     #end
     
@@ -24,9 +24,8 @@ class TasksController < ApplicationController
       flash[:success] = 'タスクを投稿しました。'
       redirect_to root_url
     else
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-      flash.now[:danger] = 'タスクの投稿に失敗しました。'
-      render 'tasks/index'
+      flash.now[:danger] = 'Task は更新されませんでした'
+      render :new
     end
   end
   
