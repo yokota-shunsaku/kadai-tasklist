@@ -2,16 +2,10 @@ class TasksController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
   def index
-    #if logged_in?
-      #@task = current_user.tasks.build  # form_with 用
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-    #end
-    
-    #@tasks = Task.all.page(params[:page]).per(3)
   end
 
   def show
-    #@task = Task.find(params[:id])
   end
 
   def new
@@ -53,7 +47,6 @@ class TasksController < ApplicationController
   
   private
 
-  # Strong Parameter
   def task_params
     params.require(:task).permit(:content, :status)
   end
